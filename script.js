@@ -9,32 +9,54 @@ const createPlayer = (name, mark) => ({
 });
 const game = () => {
         const gameBoard = [];
-        const player1 = createPlayer('Gandalf', 'X');
-        const player2 = createPlayer('Sauron', 'O');
+        const player1 = createPlayer('Gandalf', 'x');
+        const player2 = createPlayer('Sauron', 'o');
         return { gameBoard, player1, player2,};
 };
 
-const result = game().gameBoard;
-function display(){
-    result.forEach(val => {
-        const h1 = document.createElement('h1');
-        h1.textContent = val;
-        gameContainer.appendChild(h1)
-    })
+
+
+function checkWin(){
+    
 }
 
+function makeGrid(){
+    for(let i = 0; i < 9; i++){
+        let cell = document.createElement('div');
+        cell.classList.add('el')
+        if(i === 0 || i === 3 || i === 6){
+            cell.classList.add('not-left')
+        } 
+        if(i === 6 || i === 7 || i === 8){
+            cell.classList.add('not-bot')
+        }
+        gameContainer.appendChild(cell)
+    }
+}
+let currentPlayer = game().player1.name
+let result = game().gameBoard
 gameContainer.addEventListener('click', (e)=>{
+    
     if(e.target.className === 'container'){return}
-    if(e.target.innerText === 'x'){
-        console.log(e.target.innerText)
-        result.pop()
-        result.push(e.target.innerText)
-        display()
+    if(e.target.innerText === 'x' || e.target.innerText === 'o'){return}
+    if(currentPlayer === game().player1.name){
+        e.target.innerText += game().player1.mark
+        result.push(game().player1.mark)
+        console.log(result)
+        changeTurn()
     }else{
-        console.log(e.target.innerText)
-        result.pop()
-        result.push(e.target.innerText)
-        display()
+        e.target.innerText += game().player2.mark
+        result.push(game().player2.mark)
+        console.log(result)
+        changeTurn()
     }
 })
+
+function changeTurn(){
+    if(currentPlayer === game().player1.name){
+        currentPlayer = game().player2.name;
+    }else {
+        currentPlayer = game().player1.name;
+    }
+}
 
