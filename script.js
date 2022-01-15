@@ -15,23 +15,26 @@ const game = () => {
 };
 
 const result = game().gameBoard;
-gameContainer.addEventListener('click', (e)=>{
-    if(e.target.innerText === 'x'){
-        console.log(e.target.innerText)
-        result.pop()
-        result.push(e.target.innerText)
-    }else{
-        console.log(e.target.innerText)
-        result.pop()
-        result.push(e.target.innerText)
-    }
-})
 function display(){
-    
     result.forEach(val => {
         const h1 = document.createElement('h1');
         h1.textContent = val;
         gameContainer.appendChild(h1)
     })
 }
+
+gameContainer.addEventListener('click', (e)=>{
+    if(e.target.className === 'container'){return}
+    if(e.target.innerText === 'x'){
+        console.log(e.target.innerText)
+        result.pop()
+        result.push(e.target.innerText)
+        display()
+    }else{
+        console.log(e.target.innerText)
+        result.pop()
+        result.push(e.target.innerText)
+        display()
+    }
+})
 
