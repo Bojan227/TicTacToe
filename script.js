@@ -29,14 +29,33 @@ const winCombinations = [
 ];
 let currentPlayer = game().player1.mark
 const result = game().gameBoard
-
-function checkWin() {
-     return winCombinations.find(combination => combination.every(index => result[index] === currentPlayer)) || false
-        
-}
 function isDraw(){
     return result.every(el => el === 'x' || el === 'o')
-}    
+}  
+function changeTurn(){
+    if(currentPlayer === game().player1.mark){
+        currentPlayer = game().player2.mark;
+    }else {
+        currentPlayer = game().player1.mark;
+    }
+}
+function checkWin() {
+     
+     let condition = ''
+     // eslint-disable-next-line array-callback-return
+    winCombinations.find((combination) => {
+          condition = combination.every(index => result[index] === currentPlayer) || false;
+          return condition
+         })
+        if(condition === true){
+            console.log('You win')
+        }else if(isDraw()){
+            console.log('Game draw')
+        }else{
+            changeTurn()
+        }
+}
+  
 
 
 function makeGrid(){
@@ -67,13 +86,7 @@ function makeGrid(){
     }
 }
 
-function changeTurn(){
-    if(currentPlayer === game().player1.mark){
-        currentPlayer = game().player2.mark;
-    }else {
-        currentPlayer = game().player1.mark;
-    }
-}
+
 
 function start(){
     const startScreen = document.querySelector('.startScreen')
@@ -89,12 +102,12 @@ gridContainer.addEventListener('click', (e)=>{
     if(currentPlayer === game().player1.mark){
         e.target.innerText += game().player1.mark
         result[index] = game().player1.mark
-        
+        checkWin()
         
     }else{
         e.target.innerText += game().player2.mark
         result[index] = game().player2.mark
-       
+        checkWin()
     } 
 });
 
