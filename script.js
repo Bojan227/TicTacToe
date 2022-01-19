@@ -9,17 +9,11 @@ const createPlayer = (name, mark) => ({
         mark,
 });
 const game = () => {
-<<<<<<< HEAD
     const input1 = document.querySelector('.player1').value
     const input2 = document.querySelector('.player2').value
         const gameBoard = ['', '', '', '', '', '', '', '', ''];
         const player1 = createPlayer(input1, 'x');
         const player2 = createPlayer(input2, 'o');
-=======
-        const gameBoard = ['', '', '', '', '', '', '', '', ''];
-        const player1 = createPlayer('Gandalf', 'x');
-        const player2 = createPlayer('Sauron', 'o');
->>>>>>> 941fb83a140971f7d0b619db133053a0d07ce3bc
         return { gameBoard, player1, player2,};
 };
 
@@ -37,49 +31,13 @@ let currentPlayer = game().player1.mark
 const result = game().gameBoard
 
 function checkWin() {
-<<<<<<< HEAD
      return winCombinations.find(combination => combination.every(index => result[index] === currentPlayer)) || false
         
-=======
-    return winCombinations.find(combination =>{
-    return combination.every((index)=> result[index] === currentPlayer)
-    }) || false;
-}
-function isDraw(){
-    return result.every(el => {
-        return el === 'x' || el === 'o'
-    })
-}    
-
-
-function makeGrid(){
-    for(let i = 0; i < 9; i++){
-        let cell = document.createElement('div');
-        cell.classList.add('el')
-        cell.setAttribute('id', i)
-        if(i === 0 || i === 3 || i === 6){
-            cell.classList.add('not-left')
-        } 
-        if(i === 6 || i === 7 || i === 8){
-            cell.classList.add('not-bot')
-        }
-        gameContainer.appendChild(cell)
-    }
-}
-
-function changeTurn(){
-    if(currentPlayer === game().player1.mark){
-        currentPlayer = game().player2.mark;
-    }else {
-        currentPlayer = game().player1.mark;
-    }
->>>>>>> 941fb83a140971f7d0b619db133053a0d07ce3bc
 }
 function isDraw(){
     return result.every(el => el === 'x' || el === 'o')
 }    
 
-<<<<<<< HEAD
 
 function makeGrid(){
     const names = document.createElement('div') 
@@ -114,23 +72,6 @@ function changeTurn(){
         currentPlayer = game().player2.mark;
     }else {
         currentPlayer = game().player1.mark;
-=======
-gameContainer.addEventListener('click', (e)=>{
-    
-    const index = e.target.id
-    if(e.target.className === 'container'){return}
-    if(e.target.innerText === 'x' || e.target.innerText === 'o'){return}
-    if(currentPlayer === game().player1.mark){
-        e.target.innerText += game().player1.mark
-        result[index] = game().player1.mark
-        console.log(checkWin())
-        console.log(result)
-        
-    }else{
-        e.target.innerText += game().player2.mark
-        result[index] = game().player2.mark
-        console.log(checkWin())
->>>>>>> 941fb83a140971f7d0b619db133053a0d07ce3bc
     }
 }
 
@@ -157,9 +98,4 @@ gridContainer.addEventListener('click', (e)=>{
     } 
 });
 
-<<<<<<< HEAD
 playButton.addEventListener('click', start);
-=======
-makeGrid()
-
->>>>>>> 941fb83a140971f7d0b619db133053a0d07ce3bc

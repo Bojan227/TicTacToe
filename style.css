@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 .container{
     display: flex;
@@ -52,29 +51,3 @@ input{
 .no-display{
     display: none;
 }
-=======
-body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
-.container{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-}
-.container>*{
-    border-bottom: 2px solid black;
-    border-left: 2px solid black;
-}
-.el{
-    padding: 50px;
-}
-.not-left{
-    border-left: none;
-}
-.not-bot{
-    border-bottom: none;
-}
->>>>>>> 941fb83a140971f7d0b619db133053a0d07ce3bc
