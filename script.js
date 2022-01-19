@@ -4,6 +4,7 @@
 const gameContainer = document.querySelector('.container');
 const gridContainer = document.querySelector('.gridContainer')
 const playButton = document.querySelector('.playButton')
+
 const createPlayer = (name, mark) => ({
         name,
         mark,
@@ -28,7 +29,8 @@ const winCombinations = [
     [2, 4, 6],
 ];
 let currentPlayer = game().player1.mark
-const result = game().gameBoard
+// eslint-disable-next-line prefer-const
+let result = game().gameBoard
 function isDraw(){
     return result.every(el => el === 'x' || el === 'o')
 }  
@@ -39,6 +41,35 @@ function changeTurn(){
         currentPlayer = game().player1.mark;
     }
 }
+
+function resetBoard(){
+    const remove = document.querySelector('.end')
+    result = game().gameBoard
+    gridContainer.childNodes.innerHtml = ''
+    remove.classList.add('no-display')
+    remove.classList.remove('end')
+}
+
+function endGame(){
+    const end = document.createElement('div')
+    const resetButton = document.createElement('button')
+    resetButton.classList.add('reset')
+    resetButton.textContent = 'Reset'
+    end.classList.add('end')
+    if(currentPlayer === game().player1.mark){
+        const h1 = document.createElement('h1')
+        h1.textContent = `${game().player1.name} won the game`
+        end.appendChild(h1)
+    }else if(currentPlayer === game().player2.mark){
+        const h2 = document.createElement('h1')
+        h2.textContent = `${game().player2.name} won the game`
+        end.appendChild(h2)
+    }
+    resetButton.addEventListener('click', resetBoard)
+    end.appendChild(resetButton)
+    gameContainer.appendChild(end)
+}
+
 function checkWin() {
      
      let condition = ''
@@ -48,7 +79,7 @@ function checkWin() {
           return condition
          })
         if(condition === true){
-            console.log('You win')
+           endGame()
         }else if(isDraw()){
             console.log('Game draw')
         }else{
@@ -59,8 +90,6 @@ function checkWin() {
 
 
 function makeGrid(){
-    const names = document.createElement('div') 
-    names.classList.add('names')  
     const h1 = document.createElement('h2')
     const h2 = document.createElement('h2')
     h1.classList.add('play1')
@@ -81,8 +110,8 @@ function makeGrid(){
         }
         
         gridContainer.appendChild(cell)
-        names.append(h1, h2)
-        gameContainer.insertAdjacentElement('beforeend', names)
+        gameContainer.insertAdjacentElement('afterbegin', h1)
+        gameContainer.insertAdjacentElement('beforeend', h2)
     }
 }
 

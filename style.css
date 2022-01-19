@@ -2,7 +2,7 @@
 .container{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     min-height: 100vh;
 }
@@ -10,6 +10,9 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
+    padding: 20px;
+    height: 450px;
+    width: 450px;
 }
 .gridContainer>*{
     border-bottom: 2px solid black;
@@ -39,15 +42,20 @@
     text-align: center;
    
 }
-.names{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-}
 input{
     text-align: center;
 }
 .no-display{
     display: none;
+}
+.end{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background-color: black;
+    color: whitesmoke;
 }
