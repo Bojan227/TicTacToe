@@ -42,40 +42,42 @@ function changeTurn(){
     }
 }
 
+function draw(){
+    const winningMessage = document.querySelector('.winningMessage')
+    winningMessage.textContent = 'Draw'
+}
 function resetBoard(){
     const remove = document.querySelector('.end')
+    const cells = document.querySelectorAll('.el')
+    cells.forEach(cell => cell.classList.remove('x'))
+    cells.forEach(cell => cell.classList.remove('circle'))
     result = game().gameBoard
-    gridContainer.childNodes.innerHtml = ''
-    remove.classList.add('no-display')
+    remove.classList.add('none')
     remove.classList.remove('end')
 }
 
+function newGame(){
+   
+    }
 function endGame(){
-    const end = document.createElement('div')
-    const buttons = document.createElement('div')
-    buttons.classList.add('buttons')
-    const resetButton = document.createElement('button')
-    const startNew = document.createElement('button')
-    startNew.classList.add('new')
-    resetButton.classList.add('reset')
-    end.classList.add('end')
-    startNew.textContent = 'New Game'
-    resetButton.textContent = 'Reset'
-    if(currentPlayer !== game().player1.mark){
-        const h2 = document.createElement('h1')
-        h2.textContent = `${game().player2.name} won the game`
-        end.appendChild(h2)
-    }else if(currentPlayer !== game().player2.mark){
-        const h1 = document.createElement('h1')
-        h1.textContent = `${game().player1.name} won the game`
-        end.appendChild(h1)
+    const end = document.querySelector('.none')
+    const winningMessage = document.querySelector('.winningMessage')
+    const resetButton = document.querySelector('.reset')
+    const startNew = document.querySelector('.startNew')
+    if(!isDraw() && currentPlayer !== game().player1.mark){
+        winningMessage.textContent = `${game().player2.name} won the game`
+    }else if(!isDraw() && currentPlayer !== game().player2.mark){
+        winningMessage.textContent = `${game().player1.name} won the game`
+    }else{
+        winningMessage.textContent = 'Draw'
     }
     startNew.addEventListener('click', newGame)
     resetButton.addEventListener('click', resetBoard)
-    buttons.append(resetButton, startNew)
-    end.append(buttons)
-    gameContainer.insertAdjacentElement('afterend', end)
+    end.classList.remove('none')
+    end.classList.add('end')
+    
 }
+
 
 function checkWin() {
      let condition = ''
@@ -128,9 +130,7 @@ function start(){
     startScreen.classList.add('no-display')
 }
 
-function newGame(){
-location.reload()
-}
+
 gridContainer.addEventListener('click', (e)=>{
     const index = e.target.id
     if(e.target.className === 'container' || e.target.className === 'gridContainer'){return}
