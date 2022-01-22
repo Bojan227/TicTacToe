@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-console */
 /* eslint-disable prettier/prettier */
-const gameContainer = document.querySelector('.container');
+
 const gridContainer = document.querySelector('.gridContainer')
 const playButton = document.querySelector('.playButton')
 
@@ -42,10 +42,6 @@ function changeTurn(){
     }
 }
 
-function draw(){
-    const winningMessage = document.querySelector('.winningMessage')
-    winningMessage.textContent = 'Draw'
-}
 function resetBoard(){
     const remove = document.querySelector('.end')
     const cells = document.querySelectorAll('.el')
@@ -57,7 +53,21 @@ function resetBoard(){
 }
 
 function newGame(){
-   
+    const startScreen = document.querySelector('.startScreen')
+    const remove = document.querySelector('.end')
+    const player1 = document.querySelector('.play1')
+    const player2 = document.querySelector('.play2')
+    const input1 = document.querySelector('.player1')
+    const input2 = document.querySelector('.player2')
+    input1.value = ''
+    input2.value = ''
+    player1.remove()
+    player2.remove()
+    startScreen.classList.remove('no-display')
+    gridContainer.textContent = ''
+    remove.classList.add('none')
+    remove.classList.remove('end')
+    result = game().gameBoard
     }
 function endGame(){
     const end = document.querySelector('.none')
@@ -77,8 +87,6 @@ function endGame(){
     end.classList.add('end')
     
 }
-
-
 function checkWin() {
      let condition = ''
      // eslint-disable-next-line array-callback-return
@@ -94,10 +102,8 @@ function checkWin() {
             changeTurn()
         }
 }
-  
-
-
 function makeGrid(){
+    const gameContainer = document.querySelector('.container');
     const h1 = document.createElement('h2')
     const h2 = document.createElement('h2')
     h1.classList.add('play1')
@@ -115,22 +121,16 @@ function makeGrid(){
         if(i === 6 || i === 7 || i === 8){
             cell.classList.add('not-bot')
         }
-        
         gridContainer.appendChild(cell)
         gameContainer.insertAdjacentElement('afterbegin', h1)
         gameContainer.insertAdjacentElement('beforeend', h2)
     }
 }
-
-
-
 function start(){
     const startScreen = document.querySelector('.startScreen')
     makeGrid()
     startScreen.classList.add('no-display')
 }
-
-
 gridContainer.addEventListener('click', (e)=>{
     const index = e.target.id
     if(e.target.className === 'container' || e.target.className === 'gridContainer'){return}
