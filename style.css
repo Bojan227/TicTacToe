@@ -1,10 +1,18 @@
 
+*{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+}
 .container{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    min-height: 100vh;
+    height: 100vh;
+    width: 100vw;
+    
 }
 .gridContainer{
     display: grid;
@@ -13,10 +21,17 @@
     padding: 20px;
     height: 450px;
     width: 450px;
+
+    
 }
 .gridContainer>*{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-bottom: 2px solid black;
     border-left: 2px solid black;
+    position: relative;
+    cursor: pointer;
 }
 .el{
     padding: 50px;
@@ -30,13 +45,14 @@
 
 .top{
    display: flex;
-   gap: 50px;
+   gap: 60px;
    margin-bottom: 10px;
    padding: 40px;
 }
 .left, .right{
     padding: 20px;
     text-align: center;
+    
 }
 .bot{
     text-align: center;
@@ -44,18 +60,57 @@
 }
 input{
     text-align: center;
+    margin-top: 15px;
 }
 .no-display{
     display: none;
 }
 .end{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    background-color: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .9);
+    padding: 20px;
     color: whitesmoke;
+    
+}
+.x, .circle{
+    cursor: not-allowed;
+}
+.x::before,
+.x::after{
+    content: '';
+    position: absolute;
+    width:  15px;
+    height: 120px;
+    background-color: black;
+}
+.x::before{
+    transform: rotate(45deg);
+}
+.x::after{
+    transform: rotate(-45deg);
+}
+
+.circle::before,
+.circle::after{
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+}
+.circle::before{
+    width: 80px;
+    height: 120px;
+    background-color: black;
+}
+.circle::after{
+    width: 50px;
+    height: 100px;
+    background-color: white;
 }
