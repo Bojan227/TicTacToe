@@ -52,26 +52,32 @@ function resetBoard(){
 
 function endGame(){
     const end = document.createElement('div')
+    const buttons = document.createElement('div')
+    buttons.classList.add('buttons')
     const resetButton = document.createElement('button')
+    const startNew = document.createElement('button')
+    startNew.classList.add('new')
     resetButton.classList.add('reset')
-    resetButton.textContent = 'Reset'
     end.classList.add('end')
-    if(currentPlayer === game().player1.mark){
-        const h1 = document.createElement('h1')
-        h1.textContent = `${game().player1.name} won the game`
-        end.appendChild(h1)
-    }else if(currentPlayer === game().player2.mark){
+    startNew.textContent = 'New Game'
+    resetButton.textContent = 'Reset'
+    if(currentPlayer !== game().player1.mark){
         const h2 = document.createElement('h1')
         h2.textContent = `${game().player2.name} won the game`
         end.appendChild(h2)
+    }else if(currentPlayer !== game().player2.mark){
+        const h1 = document.createElement('h1')
+        h1.textContent = `${game().player1.name} won the game`
+        end.appendChild(h1)
     }
+    startNew.addEventListener('click', newGame)
     resetButton.addEventListener('click', resetBoard)
-    end.appendChild(resetButton)
-    gameContainer.appendChild(end)
+    buttons.append(resetButton, startNew)
+    end.append(buttons)
+    gameContainer.insertAdjacentElement('afterend', end)
 }
 
 function checkWin() {
-     
      let condition = ''
      // eslint-disable-next-line array-callback-return
     winCombinations.find((combination) => {
@@ -81,7 +87,7 @@ function checkWin() {
         if(condition === true){
            endGame()
         }else if(isDraw()){
-            console.log('Game draw')
+            endGame()
         }else{
             changeTurn()
         }
@@ -98,7 +104,6 @@ function makeGrid(){
     h2.textContent = game().player2.name
     // eslint-disable-next-line no-plusplus
     for(let i = 0; i < 9; i++){
-        
         const cell = document.createElement('div');
         cell.classList.add('el')
         cell.setAttribute('id', i)
@@ -121,20 +126,22 @@ function start(){
     const startScreen = document.querySelector('.startScreen')
     makeGrid()
     startScreen.classList.add('no-display')
-
 }
 
+function newGame(){
+location.reload()
+}
 gridContainer.addEventListener('click', (e)=>{
     const index = e.target.id
     if(e.target.className === 'container' || e.target.className === 'gridContainer'){return}
-    if(e.target.innerText === 'x' || e.target.innerText === 'o'){return}
+    if(e.target.classList.contains('x') || e.target.classList.contains('circle')){return}
     if(currentPlayer === game().player1.mark){
-        e.target.innerText += game().player1.mark
+        e.target.classList.add('x')
         result[index] = game().player1.mark
         checkWin()
         
     }else{
-        e.target.innerText += game().player2.mark
+        e.target.classList.add('circle')
         result[index] = game().player2.mark
         checkWin()
     } 
