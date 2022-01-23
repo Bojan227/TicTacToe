@@ -36,10 +36,17 @@ const game = () => {
         return result.every(el => el === 'x' || el === 'o')
     }  
     function changeTurn(){
+        const player1 = document.querySelector('.play1')
+        const player2 = document.querySelector('.play2')
         if(currentPlayer === game().player1.mark){
             currentPlayer = game().player2.mark;
+            player1.classList.add('names')
+            player2.classList.remove('names')
+
         }else {
             currentPlayer = game().player1.mark;
+            player2.classList.add('names')
+            player1.classList.remove('names')
         }
     }
     
